@@ -211,13 +211,13 @@ document.addEventListener("mousemove", (e) => {
         y: rect.top,
         w: rect.width,
         h: rect.height,
-        vx: (Math.random() - 0.5) * 25, // VẬN TỐC CAO
-        vy: (Math.random() - 0.5) * 25,
+        vx: (Math.random() - 0.5) * 3, // VẬN TỐC RẤT CHẬM
+        vy: (Math.random() - 0.5) * 3,
         ax: 0,
         ay: 0,
         rot: Math.random() * 360,
-        rotSpeed: (Math.random() - 0.5) * 30, // XOAY NHANH
-        angularAcc: (Math.random() - 0.5) * 1.2, // CỰC CHAOS
+        rotSpeed: (Math.random() - 0.5) * 5, // XOAY RẤT CHẬM
+        angularAcc: (Math.random() - 0.5) * 0.2, // CHAOS TỐI THIỂU
         delay: Math.random() * 200,
         started: false,
         scale: 1,
@@ -240,31 +240,19 @@ document.addEventListener("mousemove", (e) => {
         else continue;
       }
 
-      // === LOẠN XẠ CỰC ĐỘC - NHANH KHÔNG CÓ QUY LUẬT ===
-      // Thay đổi acceleration mỗi frame với tần suất cao và magnitude khủng
-      if (Math.random() < 0.6) {
-        f.ax = (Math.random() - 0.5) * 6;
-        f.ay = (Math.random() - 0.5) * 6;
+      // === LƠ LỬNG NHẸ NHÀNG - CHẬM ĐÃ ===
+      // Rất ít thay đổi acceleration
+      if (Math.random() < 0.01) {
+        f.ax = (Math.random() - 0.5) * 0.01;
+        f.ay = (Math.random() - 0.5) * 0.01;
       }
 
       // Gia tốc áp dụng
       f.vx += f.ax;
       f.vy += f.ay;
 
-      // Thêm "xung đột" ngẫu nhiên với cường độ cao
-      if (Math.random() < 0.3) {
-        f.vx *= -1.2 + Math.random() * 2.4;
-        f.vy *= -1.2 + Math.random() * 2.4;
-      }
-
-      // Thêm xung lực ngẫu nhiên mạnh mẽ
-      if (Math.random() < 0.25) {
-        f.vx += (Math.random() - 0.5) * 15;
-        f.vy += (Math.random() - 0.5) * 15;
-      }
-
-      // Giới hạn tốc độ CỰC NHANH
-      const speedLimit = 20 + Math.random() * 30; // 20-50 px/frame
+      // Giới hạn tốc độ RẤT CHẬM - MOBILE FRIENDLY
+      const speedLimit = 0.1; // 0.1 px/frame thôi
       const speed = Math.sqrt(f.vx * f.vx + f.vy * f.vy);
       if (speed > speedLimit) {
         f.vx *= speedLimit / speed;
@@ -274,70 +262,44 @@ document.addEventListener("mousemove", (e) => {
       f.x += f.vx;
       f.y += f.vy;
 
-      // Xoay vòng bất thường với tần suất cao
+      // Xoay rất chậm
       f.rotSpeed += f.angularAcc;
-      if (Math.random() < 0.4) {
-        f.angularAcc = (Math.random() - 0.5) * 3;
+      if (Math.random() < 0.01) {
+        f.angularAcc = (Math.random() - 0.5) * 0.02;
       }
-      // Xoay tròn hoàn toàn ngẫu nhiên thường xuyên
-      if (Math.random() < 0.2) {
+      // Xoay tròn rất hiếm
+      if (Math.random() < 0.002) {
         f.rot = Math.random() * 360;
-        f.rotSpeed = (Math.random() - 0.5) * 60;
+        f.rotSpeed = (Math.random() - 0.5) * 0.1;
       }
       f.rot += f.rotSpeed;
 
-      // === BOUNCE NGẪU NHIÊN VỀ CHIỀU VỚI CHAOS ===
+      // === BOUNCE NHẸ NHÀNG ===
       if (f.x > w) {
         f.x = -f.w;
-        f.vx *= -0.3 + Math.random() * 1.2;
+        f.vx *= -0.8;
       }
       if (f.x + f.w < 0) {
         f.x = w;
-        f.vx *= -0.3 + Math.random() * 1.2;
+        f.vx *= -0.8;
       }
       if (f.y > h) {
         f.y = -f.h;
-        f.vy *= -0.3 + Math.random() * 1.2;
+        f.vy *= -0.8;
       }
       if (f.y + f.h < 0) {
         f.y = h;
-        f.vy *= -0.3 + Math.random() * 1.2;
+        f.vy *= -0.8;
       }
 
-      // === VA CHẠM VỚI NHAU (CHAOS MẠO HIỂM CỰC ĐỘC) ===
-      for (let j = i + 1; j < flying.length; j++) {
-        const f2 = flying[j];
-        if (!f2.started) continue;
+      // === KHÔNG VA CHẠM ===
+      // Tắt va chạm để tăng tốc độ render
 
-        const dx = f.x - f2.x;
-        const dy = f.y - f2.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        const minDist = (Math.max(f.w, f.h) + Math.max(f2.w, f2.h)) * 1.5;
-
-        if (dist < minDist) {
-          // va chạm - trao đổi vận tốc + chaos với cường độ cao
-          const tempVx = f.vx;
-          const tempVy = f.vy;
-          f.vx = f2.vx * 0.7 + (Math.random() - 0.5) * 20;
-          f.vy = f2.vy * 0.7 + (Math.random() - 0.5) * 20;
-          f2.vx = tempVx * 0.7 + (Math.random() - 0.5) * 20;
-          f2.vy = tempVy * 0.7 + (Math.random() - 0.5) * 20;
-
-          // đẩy ra để không bị mắc kẹt
-          const angle = Math.atan2(dy, dx);
-          const overlap = minDist - dist;
-          f.x += Math.cos(angle) * overlap * 0.5;
-          f.y += Math.sin(angle) * overlap * 0.5;
-          f2.x -= Math.cos(angle) * overlap * 0.5;
-          f2.y -= Math.sin(angle) * overlap * 0.5;
-        }
-      }
-
-      // apply transform với scale jitter
+      // apply transform
       f.el.style.left = `${Math.round(f.x)}px`;
       f.el.style.top = `${Math.round(f.y)}px`;
       f.el.style.transform = `rotate(${f.rot}deg) scale(${
-        0.7 + Math.sin(timeStep * 0.08) * 0.3
+        0.9 + Math.sin(timeStep * 0.02) * 0.1
       })`;
     }
 
