@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🌸 Chúc Mừng Ngày Nhà Giáo Việt Nam 20/11 🌸</title>
+    <link rel="stylesheet" href="style_new.css" />
+  </head>
+  <body>
+    <!-- Hoa rơi -->
+    <div class="flowers-container" id="flowersContainer"></div>
+
+    <!-- Floating Messages -->
+    <div class="floating-messages">
+      <div class="float-msg">Cảm ơn thầy cô! 💕</div>
+      <div class="float-msg">Yêu quý thầy cô! 🌸</div>
+      <div class="float-msg">Chúc mừng 20/11! 🎉</div>
+      <div class="float-msg">Tri ân thầy cô! 🙏</div>
+    </div>
+
+    <!-- Hiệu ứng không gian 3D -->
+    <canvas id="space3d" class="space-canvas"></canvas>
+    <div class="stars-layer"></div>
+    <div class="nebula-effect"></div>
+
+    <!-- Navigation -->
+    <nav class="main-nav-celebration" id="mainNav">
+      <div class="nav-content-celebration">
+        <div class="nav-logo-celebration">
+          <span class="logo-icon-celebration">�</span>
+          <span class="logo-text-celebration">20/11 - Ngày Nhà Giáo</span>
+          <span class="logo-icon-celebration">🌸</span>
+        </div>
+        <div class="nav-menu-celebration">
+          <a href="#home" class="nav-link-celebration">
+            <span class="link-icon">🏠</span> Trang Chủ
+          </a>
+          <a href="#wishes" class="nav-link-celebration">
+            <span class="link-icon">💐</span> Lời Chúc
+          </a>
+          <a href="#gallery" class="nav-link-celebration">
+            <span class="link-icon">📸</span> Kỷ Niệm
+          </a>
+          <a href="#message" class="nav-link-celebration">
+            <span class="link-icon">✉️</span> Gửi Lời Nhắn
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Modal Chào Mừng -->
+    <div class="modal-overlay" id="welcomeModal">
+      <div class="modal-content-new">
+        <div class="modal-decoration">
+          <div class="decoration-circle circle-1"></div>
+          <div class="decoration-circle circle-2"></div>
+          <div class="decoration-circle circle-3"></div>
+        </div>
+        <div class="modal-header-new">
+          <h2 class="modal-title-gradient">Chào Mừng Bạn!</h2>
+          <div class="modal-subtitle">Ngày Nhà Giáo Việt Nam 20/11</div>
+        </div>
+        <div class="modal-body-new">
+          <p class="modal-quote">"Tình thầy nghĩa cô như biển trời bao la"</p>
+          <div class="modal-flowers-animated">
+            <span class="flower-bounce">🌸</span>
+            <span class="flower-bounce">🌺</span>
+            <span class="flower-bounce">🌻</span>
+            <span class="flower-bounce">🌷</span>
+            <span class="flower-bounce">🌹</span>
+          </div>
+        </div>
+        <button class="modal-btn-new" id="closeModal">
+          <span>Khám Phá Ngay</span>
+          <span class="btn-icon">✨</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+      <div class="hero-content-celebration">
+        <div class="celebration-icons">
+          <span class="icon-float">🎓</span>
+          <span class="icon-float">📚</span>
+          <span class="icon-float">✏️</span>
+          <span class="icon-float">🍎</span>
+          <span class="icon-float">🏫</span>
+        </div>
+        <h1 class="hero-title-celebration">
+          <span class="title-line">Chúc Mừng</span>
+          <span class="title-line-large">Ngày Nhà Giáo</span>
+          <span class="title-line">Việt Nam 20/11</span>
+        </h1>
+        <p class="hero-quote-celebration">
+          "Không thầy đố mày làm nên"<br />
+          <span class="quote-sub">Tình thầy nghĩa cô như biển trời bao la</span>
+        </p>
+        <div class="hero-flowers">
+          <span class="flower-lg">🌸</span>
+          <span class="flower-lg">🌺</span>
+          <span class="flower-lg">🌻</span>
+          <span class="flower-lg">🌷</span>
+          <span class="flower-lg">🌹</span>
+        </div>
+      </div>
+
+      <!-- Đếm ngược -->
+      <div class="countdown-modern">
+        <div class="countdown-header">
+          <span class="countdown-icon">⏰</span>
+          <h3>Đếm Ngược Đến Ngày 20/11</h3>
+        </div>
+        <div class="countdown-display" id="countdown">
+          <div class="time-block">
+            <div class="time-circle">
+              <svg class="time-svg" viewBox="0 0 100 100">
+                <circle class="time-bg" cx="50" cy="50" r="45"></circle>
+                <circle
+                  class="time-progress"
+                  cx="50"
+                  cy="50"
+                  r="45"
+                  id="daysCircle"
+                ></circle>
+              </svg>
+              <div class="time-content">
+                <span class="time-value" id="days">00</span>
+              </div>
+            </div>
+            <span class="time-label">Ngày</span>
+          </div>
+          <div class="time-block">
+            <div class="time-circle">
+              <svg class="time-svg" viewBox="0 0 100 100">
+                <circle class="time-bg" cx="50" cy="50" r="45"></circle>
+                <circle
+                  class="time-progress"
+                  cx="50"
+                  cy="50"
+                  r="45"
+                  id="hoursCircle"
+                ></circle>
+              </svg>
+              <div class="time-content">
+                <span class="time-value" id="hours">00</span>
+              </div>
+            </div>
+            <span class="time-label">Giờ</span>
+          </div>
+          <div class="time-block">
+            <div class="time-circle">
+              <svg class="time-svg" viewBox="0 0 100 100">
+                <circle class="time-bg" cx="50" cy="50" r="45"></circle>
+                <circle
+                  class="time-progress"
+                  cx="50"
+                  cy="50"
+                  r="45"
+                  id="minutesCircle"
+                ></circle>
+              </svg>
+              <div class="time-content">
+                <span class="time-value" id="minutes">00</span>
+              </div>
+            </div>
+            <span class="time-label">Phút</span>
+          </div>
+          <div class="time-block">
+            <div class="time-circle">
+              <svg class="time-svg" viewBox="0 0 100 100">
+                <circle class="time-bg" cx="50" cy="50" r="45"></circle>
+                <circle
+                  class="time-progress"
+                  cx="50"
+                  cy="50"
+                  r="45"
+                  id="secondsCircle"
+                ></circle>
+              </svg>
+              <div class="time-content">
+                <span class="time-value" id="seconds">00</span>
+              </div>
+            </div>
+            <span class="time-label">Giây</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Title -->
+      <div class="hero-title-section">
+        <h1 class="hero-title">
+          <span class="title-word">Chúc</span>
+          <span class="title-word">Mừng</span>
+        </h1>
+        <h2 class="hero-subtitle">
+          <span class="subtitle-highlight">Ngày Nhà Giáo Việt Nam</span>
+        </h2>
+        <div class="hero-date">
+          <span class="date-number">20</span>
+          <span class="date-divider">/</span>
+          <span class="date-number">11</span>
+        </div>
+      </div>
+
+      <!-- Scroll Indicator -->
+      <div class="scroll-indicator">
+        <div class="scroll-text">Cuộn xuống</div>
+        <div class="scroll-arrow">↓</div>
+      </div>
+    </section>
+
+    <!-- Wishes Section -->
+    <section id="wishes" class="wishes-section">
+      <div class="section-container">
+        <div class="section-header-celebration">
+          <h2 class="section-title-celebration">
+            <span class="title-icon">💐</span>
+            Lời Chúc Chân Thành
+            <span class="title-icon">💐</span>
+          </h2>
+          <p class="section-subtitle">Những lời tri ân từ trái tim học trò</p>
+        </div>
+
+        <div class="wishes-grid">
+          <!-- Slideshow với nhạc nền -->
+          <div class="slideshow-card-celebration">
+            <div class="card-flowers-decoration">
+              <span>🌸</span>
+              <span>🌺</span>
+              <span>🌸</span>
+            </div>
+            <div class="slideshow-container">
+              <h3 class="slideshow-title">Kỷ Niệm Với Thầy Cô</h3>
+
+              <!-- Music Control -->
+              <div class="music-control">
+                <button id="musicToggle" class="music-btn">
+                  <span class="music-icon">🎵</span>
+                  <span class="music-text">Phát nhạc</span>
+                </button>
+                <audio id="backgroundMusic" loop>
+                  <!-- Sử dụng nhạc nền miễn phí -->
+                  <source
+                    src="https://www.bensound.com/bensound-music/bensound-ukulele.mp3"
+                    type="audio/mpeg"
+                  />
+                </audio>
+              </div>
+
+              <!-- Slideshow Images -->
+              <div class="slideshow-wrapper">
+                <div class="slide active">
+                  <div class="slide-image">
+                    <div class="placeholder-image">
+                      <span class="placeholder-icon">👨‍🏫</span>
+                      <p class="placeholder-text">Thầy cô đang giảng bài</p>
+                    </div>
+                  </div>
+                  <p class="slide-caption">Những bài giảng đầy nhiệt huyết</p>
+                </div>
+
+                <div class="slide">
+                  <div class="slide-image">
+                    <div class="placeholder-image">
+                      <span class="placeholder-icon">📚</span>
+                      <p class="placeholder-text">Giờ học vui vẻ</p>
+                    </div>
+                  </div>
+                  <p class="slide-caption">Lớp học ngập tràn kiến thức</p>
+                </div>
+
+                <div class="slide">
+                  <div class="slide-image">
+                    <div class="placeholder-image">
+                      <span class="placeholder-icon">🎓</span>
+                      <p class="placeholder-text">Lễ tốt nghiệp</p>
+                    </div>
+                  </div>
+                  <p class="slide-caption">Niềm tự hào của thầy cô</p>
+                </div>
+
+                <div class="slide">
+                  <div class="slide-image">
+                    <div class="placeholder-image">
+                      <span class="placeholder-icon">🏆</span>
+                      <p class="placeholder-text">Những thành tích</p>
+                    </div>
+                  </div>
+                  <p class="slide-caption">Kết quả của sự dạy dỗ tận tâm</p>
+                </div>
+
+                <div class="slide">
+                  <div class="slide-image">
+                    <div class="placeholder-image">
+                      <span class="placeholder-icon">💐</span>
+                      <p class="placeholder-text">Ngày 20/11</p>
+                    </div>
+                  </div>
+                  <p class="slide-caption">Tặng hoa tri ân thầy cô</p>
+                </div>
+
+                <!-- Navigation Arrows -->
+                <button class="slide-prev" onclick="changeSlide(-1)">❮</button>
+                <button class="slide-next" onclick="changeSlide(1)">❯</button>
+              </div>
+
+              <!-- Slide Indicators -->
+              <div class="slide-indicators">
+                <span class="indicator active" onclick="currentSlide(0)"></span>
+                <span class="indicator" onclick="currentSlide(1)"></span>
+                <span class="indicator" onclick="currentSlide(2)"></span>
+                <span class="indicator" onclick="currentSlide(3)"></span>
+                <span class="indicator" onclick="currentSlide(4)"></span>
+              </div>
+            </div>
+            <div class="card-bottom-flowers">
+              <span>🎓</span>
+              <span>💡</span>
+              <span>📖</span>
+            </div>
+          </div>
+
+          <!-- Interactive Hearts Card -->
+          <div class="hearts-card-celebration">
+            <div class="card-flowers-decoration">
+              <span>🌷</span>
+              <span>🌹</span>
+              <span>🌷</span>
+            </div>
+            <div class="hearts-content">
+              <h3 class="hearts-title">Tình Thương Vô Bờ</h3>
+              <p class="hearts-message">
+                Tình thầy nghĩa cô như biển trời bao la, ơn sâu nghĩa nặng khó
+                mà quên
+              </p>
+
+              <!-- Hearts Canvas -->
+              <div class="hearts-canvas-container">
+                <canvas id="heartsCanvas" class="hearts-canvas"></canvas>
+                <div class="hearts-instruction">
+                  <span class="instruction-icon">💕</span>
+                  <p>Di chuyển chuột để tạo trái tim</p>
+                  <p class="instruction-sub">Click để tạo trái tim lớn!</p>
+                </div>
+              </div>
+
+              <!-- Love Counter -->
+              <div class="love-counter">
+                <div class="counter-item">
+                  <span class="counter-icon">❤️</span>
+                  <div class="counter-info">
+                    <span class="counter-value" id="heartCount">0</span>
+                    <span class="counter-label">Trái Tim</span>
+                  </div>
+                </div>
+                <div class="counter-item">
+                  <span class="counter-icon">🌟</span>
+                  <div class="counter-info">
+                    <span class="counter-value" id="lovePoints">0</span>
+                    <span class="counter-label">Điểm Yêu Thương</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-bottom-flowers">
+              <span>💕</span>
+              <span>🤝</span>
+              <span>💝</span>
+            </div>
+          </div>
+
+          <!-- Poem Reader Card -->
+          <div class="poem-card-celebration">
+            <div class="card-flowers-decoration">
+              <span>🌻</span>
+              <span>🌼</span>
+              <span>🌻</span>
+            </div>
+            <div class="poem-content">
+              <h3 class="poem-title">Ân Tình Sâu Nặng</h3>
+
+              <!-- Poem Display -->
+              <div class="poem-display">
+                <div class="poem-icon">📜</div>
+                <div class="poem-text" id="poemText">
+                  <p class="poem-line">Tình thầy nghĩa cô biển trời cao sâu</p>
+                  <p class="poem-line">Dạy chữ dạy người dạy cả tình đầu</p>
+                  <p class="poem-line">Mái trường ngày ấy còn đây bóng dáng</p>
+                  <p class="poem-line">Công ơn thầy cô tựa núi tựa sâu</p>
+                </div>
+              </div>
+
+              <!-- Poem Controls -->
+              <div class="poem-controls">
+                <button class="poem-btn" id="prevPoem">
+                  <span>⏮️ Trước</span>
+                </button>
+                <button class="poem-btn primary" id="readPoem">
+                  <span class="read-icon">🔊</span>
+                  <span class="read-text">Đọc Thơ</span>
+                </button>
+                <button class="poem-btn" id="nextPoem">
+                  <span>Tiếp ⏭️</span>
+                </button>
+              </div>
+
+              <!-- Poem Progress -->
+              <div class="poem-progress">
+                <div class="progress-dots">
+                  <span class="dot active"></span>
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                </div>
+              </div>
+            </div>
+            <div class="card-bottom-flowers">
+              <span>🙏</span>
+              <span>✨</span>
+              <span>🌈</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quote -->
+        <div class="quote-section-celebration">
+          <div class="quote-container-celebration">
+            <div class="quote-decoration">
+              <span>🌸</span>
+              <span>🌺</span>
+              <span>🌸</span>
+            </div>
+            <div class="quote-mark-celebration">"</div>
+            <p class="quote-text-celebration" id="rotatingQuote">
+              Không có thầy, không có giáo dục. Không có giáo dục, không có con
+              người.
+            </p>
+            <div class="quote-author-celebration">- Ngạn ngữ Việt Nam</div>
+            <div class="quote-decoration quote-decoration-bottom">
+              <span>🌷</span>
+              <span>🌹</span>
+              <span>🌷</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery-section">
+      <div class="section-container">
+        <div class="section-header-celebration">
+          <h2 class="section-title-celebration">
+            <span class="title-icon">📸</span>
+            Kỷ Niệm Đáng Nhớ
+            <span class="title-icon">📸</span>
+          </h2>
+          <p class="section-subtitle">Những khoảnh khắc đẹp với thầy cô</p>
+        </div>
+
+        <div class="gallery-grid">
+          <div class="gallery-item">
+            <div class="gallery-placeholder">
+              <span class="gallery-icon">👨‍🏫</span>
+              <p>Thầy Cô & Học Trò</p>
+            </div>
+          </div>
+          <div class="gallery-item">
+            <div class="gallery-placeholder">
+              <span class="gallery-icon">📚</span>
+              <p>Giờ Học Vui Vẻ</p>
+            </div>
+          </div>
+          <div class="gallery-item">
+            <div class="gallery-placeholder">
+              <span class="gallery-icon">🎓</span>
+              <p>Lễ Tốt Nghiệp</p>
+            </div>
+          </div>
+          <div class="gallery-item">
+            <div class="gallery-placeholder">
+              <span class="gallery-icon">🏆</span>
+              <p>Thành Tựu</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- BENTO GRID LAYOUT FOR ALL FEATURES -->
+        <div class="features-bento-grid">
+          <!-- Flowers Garden - Medium Card -->
+          <div class="bento-card bento-medium">
+            <h3 class="section-subtitle-feature">
+              <span class="feature-icon">🌺</span>
+              Vườn Hoa Tri Ân
+            </h3>
+
+            <div class="garden-info">
+              <p class="garden-desc">Nhấp để trồng hoa! 🌱</p>
+              <div class="garden-stats">
+                <div class="stat">
+                  <span class="stat-icon">🌸</span>
+                  <span id="flowerCount">0</span>
+                </div>
+                <div class="stat">
+                  <span class="stat-icon">🌈</span>
+                  Cấp <span id="gardenLevel">1</span>
+                </div>
+              </div>
+            </div>
+
+            <canvas id="gardenCanvas" class="garden-canvas"></canvas>
+
+            <div class="flower-palette">
+              <button class="flower-btn active" data-flower="🌸">🌸</button>
+              <button class="flower-btn" data-flower="🌺">🌺</button>
+              <button class="flower-btn" data-flower="🌻">🌻</button>
+              <button class="flower-btn" data-flower="🌷">🌷</button>
+              <button class="flower-btn" data-flower="🌹">🌹</button>
+              <button class="flower-btn" data-flower="🌼">🌼</button>
+            </div>
+
+            <button
+              class="add-note-btn"
+              id="clearGarden"
+              style="margin-top: 15px"
+            >
+              <span>�️</span> Xóa Vườn
+            </button>
+          </div>
+
+          <!-- Memory Wall - Wide Card -->
+          <div class="bento-card bento-wide">
+            <h3 class="section-subtitle-feature">
+              <span class="feature-icon">📝</span>
+              Bức Tường Kỷ Niệm
+            </h3>
+
+            <div class="wall-controls">
+              <input
+                type="text"
+                id="noteInput"
+                class="note-input"
+                placeholder="Viết lời nhắn tri ân thầy cô... (tối đa 100 ký tự)"
+                maxlength="100"
+              />
+              <button class="add-note-btn" id="addNote">
+                <span>📌</span> Thêm Lời Nhắn
+              </button>
+            </div>
+
+            <div class="memory-wall" id="memoryWall"></div>
+          </div>
+
+          <!-- Greeting Card Creator - Large Card -->
+          <div class="bento-card bento-large greeting-card-section">
+          <h3 class="section-subtitle-feature">
+            <span class="feature-icon">🎨</span>
+            Tạo Thiệp Chúc Mừng
+          </h3>
+
+          <div class="card-creator">
+            <div class="card-preview" id="cardPreview">
+              <div class="preview-card">
+                <div class="preview-header">
+                  <h4>Chúc Mừng Ngày Nhà Giáo</h4>
+                  <div class="preview-date">20/11</div>
+                </div>
+                <div class="preview-content">
+                  <p id="previewMessage">Kính chúc thầy cô...</p>
+                  <div class="preview-signature" id="previewSignature">
+                    - Học trò
+                  </div>
+                </div>
+                <div class="preview-decoration">
+                  <span>🌸</span>
+                  <span>🌺</span>
+                  <span>🌸</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-controls">
+              <div class="control-group">
+                <label class="control-label">Chọn mẫu thiệp:</label>
+                <div class="template-selector">
+                  <button class="template-btn active" data-template="classic">
+                    <span>🌸</span> Cổ điển
+                  </button>
+                  <button class="template-btn" data-template="modern">
+                    <span>✨</span> Hiện đại
+                  </button>
+                  <button class="template-btn" data-template="elegant">
+                    <span>🌹</span> Thanh lịch
+                  </button>
+                </div>
+              </div>
+
+              <div class="control-group">
+                <label class="control-label">Lời chúc:</label>
+                <textarea
+                  id="cardMessage"
+                  class="card-textarea"
+                  placeholder="Nhập lời chúc của bạn..."
+                  rows="3"
+                >
+Kính chúc thầy cô luôn mạnh khỏe, hạnh phúc và thành công trong sự nghiệp trồng người!</textarea
+                >
+              </div>
+
+              <div class="control-group">
+                <label class="control-label">Ký tên:</label>
+                <input
+                  type="text"
+                  id="cardSignature"
+                  class="card-input"
+                  placeholder="Tên của bạn"
+                  value="Học trò"
+                />
+              </div>
+
+              <div class="card-actions">
+                <button class="action-btn preview-btn" id="updatePreview">
+                  <span>👁️</span> Xem trước
+                </button>
+                <button class="action-btn download-btn" id="downloadCard">
+                  <span>📥</span> Tải xuống
+                </button>
+                <button class="action-btn share-btn" id="shareCardBtn">
+                  <span>📤</span> Chia sẻ
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Achievement Section -->
+    <section class="achievement-section">
+      <div class="achievement-overlay" id="achievementOverlay">
+        <div class="achievement-popup">
+          <div class="achievement-icon">🏆</div>
+          <h3 class="achievement-title">Thành Tích Mới!</h3>
+          <p class="achievement-desc" id="achievementDesc">
+            Bạn đã mở khóa thành tích mới
+          </p>
+          <div class="achievement-points">
+            +<span id="achievementPoints">10</span> điểm
+          </div>
+        </div>
+      </div>
+
+      <button class="achievement-toggle" id="achievementToggle">
+        <span class="toggle-icon">🏆</span>
+        <span class="toggle-badge" id="achievementBadge">0</span>
+      </button>
+
+      <div class="achievement-panel" id="achievementPanel">
+        <div class="panel-header">
+          <h3>Thành Tích Của Bạn</h3>
+          <button class="panel-close" id="closeAchievements">✖</button>
+        </div>
+        <div class="panel-stats">
+          <div class="stat-box">
+            <span class="stat-icon">⭐</span>
+            <div class="stat-info">
+              <span class="stat-value" id="totalPoints">0</span>
+              <span class="stat-label">Tổng điểm</span>
+            </div>
+          </div>
+          <div class="stat-box">
+            <span class="stat-icon">🏅</span>
+            <div class="stat-info">
+              <span class="stat-value" id="totalAchievements">0/10</span>
+              <span class="stat-label">Thành tích</span>
+            </div>
+          </div>
+        </div>
+        <div class="achievements-list" id="achievementsList">
+          <!-- Achievements will be added dynamically -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Fireworks Canvas -->
+    <canvas id="fireworksCanvas" class="fireworks-canvas"></canvas>
+
+    <!-- Mood Selector -->
+    <div class="mood-selector" id="moodSelector">
+      <button class="mood-toggle" id="moodToggle">
+        <span class="mood-icon">😊</span>
+      </button>
+
+      <div class="mood-panel" id="moodPanel">
+        <h3 class="mood-title">Chọn Tâm Trạng</h3>
+        <div class="mood-options">
+          <button class="mood-btn" data-mood="happy" data-emoji="😊">
+            <span class="mood-emoji">😊</span>
+            <span class="mood-label">Vui Vẻ</span>
+          </button>
+          <button class="mood-btn" data-mood="grateful" data-emoji="🙏">
+            <span class="mood-emoji">🙏</span>
+            <span class="mood-label">Biết Ơn</span>
+          </button>
+          <button class="mood-btn" data-mood="nostalgic" data-emoji="🥺">
+            <span class="mood-emoji">🥺</span>
+            <span class="mood-label">Nhớ Nhung</span>
+          </button>
+          <button class="mood-btn" data-mood="excited" data-emoji="🎉">
+            <span class="mood-emoji">🎉</span>
+            <span class="mood-label">Phấn Khích</span>
+          </button>
+          <button class="mood-btn" data-mood="loving" data-emoji="💕">
+            <span class="mood-emoji">💕</span>
+            <span class="mood-label">Yêu Thương</span>
+          </button>
+        </div>
+        <div class="mood-effect-info">
+          <p>Mỗi tâm trạng sẽ thay đổi màu sắc và hiệu ứng trang web! ✨</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Confetti Cannon -->
+    <div class="confetti-cannon">
+      <button class="cannon-btn" id="fireConfetti">
+        <span class="cannon-icon">🎊</span>
+        <span class="cannon-text">Bắn Confetti!</span>
+      </button>
+      <canvas id="confettiCanvas" class="confetti-canvas"></canvas>
+    </div>
+
+    <!-- Voice Recorder -->
+    <div class="voice-recorder-widget" id="voiceRecorder">
+      <button class="voice-toggle" id="voiceToggle">
+        <span class="voice-icon">🎤</span>
+      </button>
+
+      <div class="voice-panel" id="voicePanel">
+        <h3 class="voice-title"><span>🎤</span> Ghi Âm Lời Nhắn</h3>
+
+        <div class="recording-status" id="recordingStatus">
+          <div class="status-dot"></div>
+          <span class="status-text">Chưa ghi âm</span>
+        </div>
+
+        <div class="voice-controls">
+          <button class="voice-btn record" id="startRecord">
+            <span>🔴</span> Bắt Đầu
+          </button>
+          <button class="voice-btn stop" id="stopRecord" disabled>
+            <span>⏹️</span> Dừng
+          </button>
+          <button class="voice-btn play" id="playRecord" disabled>
+            <span>▶️</span> Nghe
+          </button>
+          <button class="voice-btn download" id="downloadRecord" disabled>
+            <span>💾</span> Lưu
+          </button>
+        </div>
+
+        <div class="waveform" id="waveform">
+          <canvas id="waveformCanvas"></canvas>
+        </div>
+
+        <div class="recordings-list" id="recordingsList">
+          <p class="list-title">Lời nhắn đã ghi:</p>
+          <!-- Recordings will be added here -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Animated Timeline -->
+    <section class="timeline-section">
+      <div class="section-container">
+        <div class="section-header-celebration">
+          <h2 class="section-title-celebration">
+            <span class="title-icon">📖</span>
+            Hành Trình Thầy Trò
+            <span class="title-icon">📖</span>
+          </h2>
+          <p class="section-subtitle">Những mốc son đáng nhớ</p>
+        </div>
+
+        <div class="timeline">
+          <div class="timeline-item" data-aos="fade-right">
+            <div class="timeline-marker">
+              <span class="marker-icon">🌱</span>
+            </div>
+            <div class="timeline-content">
+              <h4 class="timeline-title">Ngày Đầu Tiên</h4>
+              <p class="timeline-desc">
+                Ngày đầu tiên bước chân vào lớp học, gặp gỡ thầy cô thân yêu...
+              </p>
+              <span class="timeline-date">Tháng 9</span>
+            </div>
+          </div>
+
+          <div class="timeline-item" data-aos="fade-left">
+            <div class="timeline-marker">
+              <span class="marker-icon">📚</span>
+            </div>
+            <div class="timeline-content">
+              <h4 class="timeline-title">Những Bài Học</h4>
+              <p class="timeline-desc">
+                Mỗi bài học là một món quà, kiến thức được trao từ tay thầy
+                cô...
+              </p>
+              <span class="timeline-date">Quanh Năm</span>
+            </div>
+          </div>
+
+          <div class="timeline-item" data-aos="fade-right">
+            <div class="timeline-marker">
+              <span class="marker-icon">🏆</span>
+            </div>
+            <div class="timeline-content">
+              <h4 class="timeline-title">Thành Công Đầu Tiên</h4>
+              <p class="timeline-desc">
+                Niềm vui khi đạt được thành tích, nhờ sự động viên của thầy
+                cô...
+              </p>
+              <span class="timeline-date">Kỳ Thi</span>
+            </div>
+          </div>
+
+          <div class="timeline-item" data-aos="fade-left">
+            <div class="timeline-marker">
+              <span class="marker-icon">💐</span>
+            </div>
+            <div class="timeline-content">
+              <h4 class="timeline-title">Ngày 20/11</h4>
+              <p class="timeline-desc">
+                Ngày đặc biệt để tri ân, trao tặng hoa và lời cảm ơn chân
+                thành...
+              </p>
+              <span class="timeline-date">20 Tháng 11</span>
+            </div>
+          </div>
+
+          <div class="timeline-item" data-aos="fade-right">
+            <div class="timeline-marker">
+              <span class="marker-icon">🎓</span>
+            </div>
+            <div class="timeline-content">
+              <h4 class="timeline-title">Ngày Ra Trường</h4>
+              <p class="timeline-desc">
+                Lời tạm biệt nhưng tình cảm với thầy cô sẽ mãi không phai...
+              </p>
+              <span class="timeline-date">Tương Lai</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Message Section -->
+    <section id="message" class="message-section">
+      <div class="section-container">
+        <div class="section-header-celebration">
+          <h2 class="section-title-celebration">
+            <span class="title-icon">✉️</span>
+            Gửi Lời Nhắn
+            <span class="title-icon">✉️</span>
+          </h2>
+          <p class="section-subtitle">Chia sẻ tâm tư với thầy cô</p>
+        </div>
+
+        <div class="message-form-container">
+          <form class="message-form-new" id="messageForm">
+            <div class="form-row">
+              <div class="form-group-new">
+                <label class="form-label">Tên của bạn</label>
+                <input
+                  type="text"
+                  id="studentName"
+                  class="form-input-new"
+                  placeholder="Nhập tên của bạn"
+                  required
+                />
+              </div>
+              <div class="form-group-new">
+                <label class="form-label">Tên thầy/cô</label>
+                <input
+                  type="text"
+                  id="teacherName"
+                  class="form-input-new"
+                  placeholder="Nhập tên thầy/cô"
+                  required
+                />
+              </div>
+            </div>
+            <div class="form-group-new">
+              <label class="form-label">Lời nhắn của bạn</label>
+              <textarea
+                id="messageText"
+                class="form-textarea-new"
+                rows="6"
+                placeholder="Viết lời nhắn chân thành đến thầy cô..."
+                required
+              ></textarea>
+            </div>
+            <button type="submit" class="submit-btn-new">
+              <span>Gửi Lời Nhắn</span>
+              <span class="btn-icon">💕</span>
+            </button>
+          </form>
+
+          <div class="messages-display-new" id="messagesDisplay"></div>
+        </div>
+
+        <!-- Chữ ký -->
+        <div class="signature-container">
+          <h3 class="signature-title">✍️ Ký Tên Lên Thiệp</h3>
+          <canvas id="signatureCanvas" width="600" height="200"></canvas>
+          <div class="signature-controls">
+            <button class="signature-btn" id="clearSignature">🗑️ Xóa</button>
+            <button class="signature-btn" id="saveSignature">💾 Lưu</button>
+            <input type="color" id="penColor" value="#ff6ec7" />
+            <input type="range" id="penSize" min="1" max="10" value="3" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+      <div class="footer-content">
+        <div class="footer-text">
+          <p>🌸 Chúc mừng ngày Nhà giáo Việt Nam 20/11 🌸</p>
+          <p>Made with ❤️ by Students</p>
+        </div>
+        <div class="footer-social">
+          <button class="social-btn" id="shareBtn">📱 Chia sẻ</button>
+          <button class="social-btn" id="musicBtn">🎵 Nhạc</button>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Share Modal -->
+    <div class="share-modal" id="shareModal">
+      <div class="share-content">
+        <h3>Chia sẻ trang web</h3>
+        <div class="share-buttons">
+          <button class="share-btn facebook" id="shareFB">
+            <span class="share-icon">📘</span> Facebook
+          </button>
+          <button class="share-btn zalo" id="shareZalo">
+            <span class="share-icon">💬</span> Zalo
+          </button>
+          <button class="share-btn link" id="copyLink">
+            <span class="share-icon">🔗</span> Copy Link
+          </button>
+        </div>
+        <button class="close-share" id="closeShare">✖</button>
+      </div>
+    </div>
+
+    <script src="script_new.js"></script>
+  </body>
+</html>
